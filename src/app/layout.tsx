@@ -1,6 +1,8 @@
 import "./globals.css";
 
+import Footer from "@/components/footer/Footer";
 import { Golos_Text } from "next/font/google";
+import Header from "@/components/header/Header";
 import type { Metadata } from "next";
 
 const golos = Golos_Text({
@@ -23,7 +25,11 @@ export default function RootLayout({
       <body
         className={`${golos.variable} antialiased bg-background`}
       >
+        <Header />
+
         {children}
+        
+        <Footer />
       </body>
     </html>
   );
