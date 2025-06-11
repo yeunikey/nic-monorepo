@@ -1,11 +1,12 @@
 import Container from "../Container";
+import Image from "next/image";
 
 function Footer() {
     return (
         <footer className="bg-[#222] py-16">
             <Container className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div className="test">
-                    <img src={'/aitu-white.png'} className="h-20 w-auto" />
+                    <Image src={'/aitu-white.png'} alt="aitu logo" width={125} height={64} className="h-20 w-auto" />
                     <div className="text-white mt-12 text-sm">
                         Проспект Мангилик Ел, 55/11 <br /> Бизнес-центр EXPO, блок C1<br />Астана, Казахстан, 010000
                     </div>

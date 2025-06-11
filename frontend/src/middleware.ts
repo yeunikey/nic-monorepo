@@ -7,11 +7,11 @@ export function middleware(req: NextRequest) {
 
   // Если юзер уже авторизован, но заходит на /auth, редиректим на главную
   if ((token) && (pathname === "/auth")) {
-    return NextResponse.redirect(new URL("/", req.url));
+    return NextResponse.redirect(new URL("/admin", req.url));
   }
 
   // Если юзер НЕ авторизован и пытается зайти НЕ на /auth, отправляем его на /auth
-  if (!token && (pathname != '/auth')) {
+  if (!token && (pathname == '/admin')) {
     return NextResponse.redirect(new URL("/auth", req.url));
   }
 

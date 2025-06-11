@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function Hero() {
     return (
         <div className="relative pt-48 pb-64 sm:pb-72 md:pb-96 w-[95dvw] sm:w-[85dvw] md:w-3xl mx-auto overflow-hidden">
@@ -9,12 +11,12 @@ function Hero() {
             </div>
 
             <div className="mt-6 flex flex-col items-center sm:flex-row gap-3 sm:gap-6 justify-center">
-                <div className="flex gap-4 items-center py-2 px-4 bg-primary rounded-lg cursor-pointer">
+                <Link target="_blank" href={'http://localhost:3000'} className="flex gap-4 items-center py-2 px-4 bg-primary rounded-lg cursor-pointer">
                     <div className="text-white font-medium">
                         Открыть платформу
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" className="fill-white w-5 h-5" viewBox="0 -960 960 960"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z" /></svg>
-                </div>
+                </Link>
                 <div className="flex items-center cursor-pointer gap-2">
                     <div className="text-muted">
                         видео-обзор
@@ -26,7 +28,7 @@ function Hero() {
             <div className="absolute -bottom-6 sm:-bottom-20 md:-bottom-24 flex justify-center w-full">
                 <img className="" src="/hero-image.png" alt="hero image" />
             </div>
-        </div>
+        </div >
     );
 }
 

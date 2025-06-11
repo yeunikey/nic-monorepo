@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { DeepPartial, Repository } from "typeorm";
 import { User } from "./models/user.entity";
 import { ImageService } from "src/image/image.service";
 export declare class UserService {
@@ -7,6 +7,6 @@ export declare class UserService {
     constructor(userRepository: Repository<User>, imageService: ImageService);
     findById(id: number): Promise<User | null>;
     findByLogin(login: string): Promise<User | null>;
-    save(user: User): Promise<User>;
+    save(user: DeepPartial<User>): Promise<DeepPartial<User> & User>;
     delete(user: User): Promise<User>;
 }

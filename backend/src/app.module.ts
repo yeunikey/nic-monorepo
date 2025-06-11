@@ -1,3 +1,5 @@
+import { Article } from './article/models/article';
+import { ArticleModule } from './article/article.module';
 import { AuthModule } from './auth/auth.module';
 import { Image } from './image/entities/image.entity';
 import { ImageModule } from './image/image.module';
@@ -15,6 +17,7 @@ import { UserModule } from './users/user.module';
     AuthModule,
     ImageModule,
     TeamModule,
+    ArticleModule,
 
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -26,7 +29,8 @@ import { UserModule } from './users/user.module';
       entities: [
         User,
         Image,
-        Team
+        Team,
+        Article
       ],
       synchronize: true,
       logging: true,

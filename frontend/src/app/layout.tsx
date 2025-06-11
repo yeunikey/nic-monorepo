@@ -1,9 +1,11 @@
 import "./globals.css";
 
+import Authorize from "@/components/Authorize";
 import Footer from "@/components/footer/Footer";
 import { Golos_Text } from "next/font/google";
 import Header from "@/components/header/Header";
 import type { Metadata } from "next";
+import { ToastContainer } from "react-toastify";
 
 const golos = Golos_Text({
   variable: "--font-golos",
@@ -25,11 +27,18 @@ export default function RootLayout({
       <body
         className={`${golos.variable} antialiased bg-background`}
       >
-        <Header />
 
-        {children}
-        
-        <Footer />
+        <ToastContainer position="bottom-right" />
+
+        <Authorize>
+          <Header />
+
+          <div className="relative min-h-[70dvh] grow flex flex-col pb-16">
+            {children}
+          </div>
+
+          <Footer />
+        </Authorize>
       </body>
     </html>
   );

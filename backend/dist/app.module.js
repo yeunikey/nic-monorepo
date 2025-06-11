@@ -7,6 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const article_1 = require("./article/models/article");
+const article_module_1 = require("./article/article.module");
 const auth_module_1 = require("./auth/auth.module");
 const image_entity_1 = require("./image/entities/image.entity");
 const image_module_1 = require("./image/image.module");
@@ -26,6 +28,7 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
             image_module_1.ImageModule,
             team_module_1.TeamModule,
+            article_module_1.ArticleModule,
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
                 host: 'localhost',
@@ -36,7 +39,8 @@ exports.AppModule = AppModule = __decorate([
                 entities: [
                     user_entity_1.User,
                     image_entity_1.Image,
-                    team_entity_1.Team
+                    team_entity_1.Team,
+                    article_1.Article
                 ],
                 synchronize: true,
                 logging: true,
