@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param, UseGuards } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('articles')
 export class ArticleController {
@@ -13,11 +14,13 @@ export class ArticleController {
     }
 
     @Post()
+    @UseGuards(AuthGuard)
     create(@Body() dto: CreateArticleDto) {
         return this.service.create(dto);
     }
 
     @Delete(':id')
+    @UseGuards(AuthGuard)
     remove(@Param('id') id: string) {
         return this.service.remove(+id);
     }

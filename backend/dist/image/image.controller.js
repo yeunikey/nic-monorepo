@@ -16,12 +16,23 @@ exports.ImageController = void 0;
 const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
 const image_service_1 = require("./image.service");
+const auth_guard_1 = require("../auth/auth.guard");
+const user_service_1 = require("../users/user.service");
 let ImageController = class ImageController {
     imageService;
-    constructor(imageService) {
+    userService;
+    constructor(imageService, userService) {
         this.imageService = imageService;
+        this.userService = userService;
     }
-    async upload(file) {
+    async upload(file, { user: { id: user_id } }) {
+        const user = await this.userService.findById(user_id);
+        if (!user) {
+            return {
+                statusCode: common_1.HttpStatus.UNAUTHORIZED,
+                message: "У вас нет прав"
+            };
+        }
         return {
             statusCode: 200,
             data: await this.imageService.saveImage(file)
@@ -47,9 +58,11 @@ exports.ImageController = ImageController;
 __decorate([
     (0, common_1.Post)('upload'),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], ImageController.prototype, "upload", null);
 __decorate([
@@ -61,6 +74,7 @@ __decorate([
 ], ImageController.prototype, "getImage", null);
 exports.ImageController = ImageController = __decorate([
     (0, common_1.Controller)('images'),
-    __metadata("design:paramtypes", [image_service_1.ImageService])
+    __metadata("design:paramtypes", [image_service_1.ImageService,
+        user_service_1.UserService])
 ], ImageController);
 //# sourceMappingURL=image.controller.js.map

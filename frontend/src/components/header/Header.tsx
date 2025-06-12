@@ -47,10 +47,10 @@ function Header() {
                 {/* Навигация (большие экраны) */}
                 <div className="hidden sm:flex grow gap-6 items-center justify-end">
                     <div className="flex gap-4 lg:gap-8 h-full">
-                        <HeaderItem text="Главная" />
-                        <HeaderItem text="О программе" />
-                        <HeaderItem text="Новости" />
-                        <HeaderItem text="Публикаций" />
+                        <HeaderItem text="Главная" link="/" />
+                        <HeaderItem text="О программе" link="/" />
+                        <HeaderItem text="Новости" link="/news" />
+                        <HeaderItem text="Публикаций" link="/articles" />
                     </div>
 
                     <div className="flex items-center gap-2 cursor-pointer py-2 px-3 rounded-lg hover:bg-background">
@@ -68,10 +68,10 @@ function Header() {
                     <div className="sm:hidden w-full mt-4">
                         <div className="flex grow gap-6 items-center justify-end">
                             <div className="flex gap-4 lg:gap-8 h-full">
-                                <HeaderItem text="Главная" />
-                                <HeaderItem text="О программе" />
-                                <HeaderItem text="Новости" />
-                                <HeaderItem text="Публикаций" />
+                                <HeaderItem text="Главная" link="/" />
+                                <HeaderItem text="О программе" link="/" />
+                                <HeaderItem text="Новости" link="/news" />
+                                <HeaderItem text="Публикаций" link="/articles" />
                             </div>
 
                             <div className="flex items-center gap-2 cursor-pointer py-2 px-3 rounded-lg hover:bg-background">

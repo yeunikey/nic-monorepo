@@ -12,7 +12,11 @@ export class TeamService {
     ) { }
 
     async find() {
-        return await this.teamRepo.find();
+        return await this.teamRepo.find({
+            order: {
+                priority: 'asc'
+            }
+        });
     }
 
     async findById(id: number) {
@@ -25,8 +29,14 @@ export class TeamService {
         return await this.teamRepo.save(team);
     }
 
-    async delete(team: Team) {
-        return await this.teamRepo.remove(team);
+    async delete(id: number) {
+        return await this.teamRepo.delete(id);
+    }
+    async reorder(updates: { id: number, priority: number }[]) {
+        const promises = updates.map(({ id, priority }) =>
+            this.teamRepo.update({ id }, { priority })
+        );
+        await Promise.all(promises);
     }
 
 }

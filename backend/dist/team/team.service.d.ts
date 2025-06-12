@@ -6,5 +6,9 @@ export declare class TeamService {
     find(): Promise<Team[]>;
     findById(id: number): Promise<Team | null>;
     save(team: DeepPartial<Team>): Promise<DeepPartial<Team> & Team>;
-    delete(team: Team): Promise<Team>;
+    delete(id: number): Promise<import("typeorm").DeleteResult>;
+    reorder(updates: {
+        id: number;
+        priority: number;
+    }[]): Promise<void>;
 }

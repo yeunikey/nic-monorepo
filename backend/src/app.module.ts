@@ -4,6 +4,8 @@ import { AuthModule } from './auth/auth.module';
 import { Image } from './image/entities/image.entity';
 import { ImageModule } from './image/image.module';
 import { Module } from '@nestjs/common';
+import { New } from './new/models/new.entity';
+import { NewModule } from './new/new.module';
 import { Team } from './team/models/team.entity';
 import { TeamModule } from './team/team.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -18,6 +20,7 @@ import { UserModule } from './users/user.module';
     ImageModule,
     TeamModule,
     ArticleModule,
+    NewModule,
 
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -30,11 +33,30 @@ import { UserModule } from './users/user.module';
         User,
         Image,
         Team,
-        Article
+        Article,
+        New
       ],
       synchronize: true,
       logging: true,
     }),
+
+    // TypeOrmModule.forRoot({
+    //   type: 'postgres',
+    //   host: 'db-info',
+    //   port: 5432,
+    //   username: 'nic',
+    //   password: 'Astana2024!bigdata',
+    //   database: 'flood-info',
+    //   entities: [
+    //     User,
+    //     Image,
+    //     Team,
+    //     Article,
+    //     New
+    //   ],
+    //   synchronize: true,
+    //   logging: true,
+    // }),
   ],
   controllers: [],
   providers: [],

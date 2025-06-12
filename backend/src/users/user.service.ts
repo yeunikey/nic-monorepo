@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DeepPartial, Repository } from "typeorm";
 import { User } from "./models/user.entity";
-import { ImageService } from "src/image/image.service";
 
 @Injectable()
 export class UserService {
@@ -10,7 +9,6 @@ export class UserService {
     constructor(
         @InjectRepository(User)
         private userRepository: Repository<User>,
-        private imageService: ImageService
     ) { }
 
     async findById(id: number) {

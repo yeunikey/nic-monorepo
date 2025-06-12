@@ -1,6 +1,33 @@
-import Container from "@/components/Container";
+'use client'
 
-function Team() {
+import { ApiResponse, Team } from "@/types";
+import { useEffect, useState } from "react";
+
+import Container from "@/components/Container";
+import { api } from "@/api/instance";
+import { toast } from "react-toastify";
+
+function Teams() {
+
+    const [team, setTeam] = useState<Team[]>([]);
+
+    const fetchTeam = async () => {
+        try {
+            const { data } = await api.get<ApiResponse<Team[]>>('/team');
+
+            if (data.statusCode !== 200) return toast.error('Ошибка!');
+
+            const sorted = [...data.data].sort((a, b) => a.priority - b.priority);
+            setTeam(sorted);
+        } catch {
+            toast.error('Ошибка при подключении к серверу');
+        }
+    };
+
+    useEffect(() => {
+        fetchTeam();
+    }, []);
+
     return (
         <>
             <div className="md:hidden py-24 bg-white">
@@ -11,15 +38,17 @@ function Team() {
                     </div>
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-                        {Array.from({ length: 23 }).map((undefined, i) => (
+                        {team.map((member, i) => (
                             <div key={i} className="flex flex-col items-center">
-                                <div className="bg-background w-full aspect-[0.75]">
-                                </div>
+                                <img
+                                    className="bg-white w-full aspect-[0.75] object-cover"
+                                    src={`http://flood-api.astanait.edu.kz/v1/images/${member.image}`}
+                                />
                                 <div className="mt-2 font-semibold">
-                                    Имя Фамилия
+                                    {member.fullName}
                                 </div>
                                 <div className="text-muted text-sm">
-                                    Должность
+                                    {member.position}
                                 </div>
                             </div>
                         ))}
@@ -28,7 +57,7 @@ function Team() {
             </div>
 
             <div className="hidden md:block py-48 bg-white">
-                <div className="w-full max-w-[95dvw] sm:max-w-[85dvw] md:max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto flex gap-2 h-full">
+                <div className="w-full max-w-[95dvw] sm:max-w-[85dvw] md:max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto flex gap-24 h-full">
                     <div className="grow w-1/4">
                         <div className="sticky top-[40%] text-start font-semibold md:text-3xl lg:text-4xl">
                             Научно-<br />исследовательская <br />
@@ -37,15 +66,17 @@ function Team() {
                     </div>
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-                        {Array.from({ length: 23 }).map((undefined, i) => (
+                        {team.map((member, i) => (
                             <div key={i} className="flex flex-col items-center">
-                                <div className="bg-background w-full aspect-[0.75]">
-                                </div>
+                                <img
+                                    className="bg-background w-full aspect-[0.75] object-cover"
+                                    src={`http://flood-api.astanait.edu.kz/v1/images/${member.image}`}
+                                />
                                 <div className="mt-2 font-semibold">
-                                    Имя Фамилия
+                                    {member.fullName}
                                 </div>
                                 <div className="text-muted text-sm">
-                                    Должность
+                                    {member.position}
                                 </div>
                             </div>
                         ))}
@@ -56,4 +87,4 @@ function Team() {
     );
 }
 
-export default Team;
+export default Teams;

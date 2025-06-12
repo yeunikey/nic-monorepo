@@ -17,13 +17,10 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./models/user.entity");
-const image_service_1 = require("../image/image.service");
 let UserService = class UserService {
     userRepository;
-    imageService;
-    constructor(userRepository, imageService) {
+    constructor(userRepository) {
         this.userRepository = userRepository;
-        this.imageService = imageService;
     }
     async findById(id) {
         return await this.userRepository.findOneBy({
@@ -46,7 +43,6 @@ exports.UserService = UserService;
 exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository,
-        image_service_1.ImageService])
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], UserService);
 //# sourceMappingURL=user.service.js.map

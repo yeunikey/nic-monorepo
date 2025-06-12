@@ -16,7 +16,7 @@ class FindTeamParam {
 }
 exports.FindTeamParam = FindTeamParam;
 __decorate([
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
+    (0, class_validator_1.IsNumberString)(),
+    __metadata("design:type", String)
 ], FindTeamParam.prototype, "id", void 0);
 //# sourceMappingURL=findteam.param.js.map

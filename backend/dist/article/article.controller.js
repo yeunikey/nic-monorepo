@@ -16,6 +16,7 @@ exports.ArticleController = void 0;
 const common_1 = require("@nestjs/common");
 const article_service_1 = require("./article.service");
 const create_article_dto_1 = require("./dto/create-article.dto");
+const auth_guard_1 = require("../auth/auth.guard");
 let ArticleController = class ArticleController {
     service;
     constructor(service) {
@@ -40,6 +41,7 @@ __decorate([
 ], ArticleController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_article_dto_1.CreateArticleDto]),
@@ -47,6 +49,7 @@ __decorate([
 ], ArticleController.prototype, "create", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

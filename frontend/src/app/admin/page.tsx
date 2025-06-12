@@ -2,6 +2,7 @@
 
 import ArticlePage from "@/pages/admin/ArticlePage";
 import Container from "@/components/Container";
+import NewsPage from "@/pages/admin/NewsPage";
 import TeamPage from "@/pages/admin/TeamPage";
 import { cn } from "@/utils/utils";
 import { useState } from "react";
@@ -19,7 +20,7 @@ export default function AdminPage() {
         },
         {
             "name": "Новости",
-            "node": <TeamPage />
+            "node": <NewsPage />
         }
     ]
     const [currentPage, setCurrentPage] = useState(0);

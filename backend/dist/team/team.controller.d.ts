@@ -1,10 +1,22 @@
 import { HttpStatus } from "@nestjs/common";
 import { TeamCreateDTO } from "./dto/teamcreate.dto";
 import { TeamService } from "./team.service";
-import { FindTeamParam } from "./param/findteam.param";
+import { AuthRequest } from "src/types";
+import { UserService } from "src/users/user.service";
 export declare class TeamController {
     private teamService;
-    constructor(teamService: TeamService);
+    private userService;
+    constructor(teamService: TeamService, userService: UserService);
+    reorder(updates: {
+        id: number;
+        priority: number;
+    }[], { user: { id: user_id } }: AuthRequest): Promise<{
+        statusCode: HttpStatus;
+        message: string;
+    } | {
+        statusCode: HttpStatus;
+        message?: undefined;
+    }>;
     create(body: TeamCreateDTO): Promise<{
         statusCode: HttpStatus;
         data: import("typeorm").DeepPartial<import("./models/team.entity").Team> & import("./models/team.entity").Team;
@@ -13,7 +25,7 @@ export declare class TeamController {
         statusCode: HttpStatus;
         data: import("./models/team.entity").Team[];
     }>;
-    find({ id }: FindTeamParam): Promise<{
+    find(id: number): Promise<{
         statusCode: HttpStatus;
         message: string;
         data?: undefined;
@@ -22,11 +34,7 @@ export declare class TeamController {
         data: import("./models/team.entity").Team;
         message?: undefined;
     }>;
-    delete({ id }: FindTeamParam): Promise<{
+    delete(id: number): Promise<{
         statusCode: HttpStatus;
-        message: string;
-    } | {
-        statusCode: HttpStatus;
-        message?: undefined;
     }>;
 }

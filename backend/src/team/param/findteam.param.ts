@@ -1,6 +1,6 @@
-import { IsNumber } from "@nestjs/class-validator";
+import { IsNumberString } from "@nestjs/class-validator";
 
 export class FindTeamParam {
-    @IsNumber()
-    id: number;
+    @IsNumberString()
+    id: string;
 }

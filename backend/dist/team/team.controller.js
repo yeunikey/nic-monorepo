@@ -17,11 +17,24 @@ const common_1 = require("@nestjs/common");
 const auth_guard_1 = require("../auth/auth.guard");
 const teamcreate_dto_1 = require("./dto/teamcreate.dto");
 const team_service_1 = require("./team.service");
-const findteam_param_1 = require("./param/findteam.param");
+const user_service_1 = require("../users/user.service");
 let TeamController = class TeamController {
     teamService;
-    constructor(teamService) {
+    userService;
+    constructor(teamService, userService) {
         this.teamService = teamService;
+        this.userService = userService;
+    }
+    async reorder(updates, { user: { id: user_id } }) {
+        const user = await this.userService.findById(user_id);
+        if (!user) {
+            return {
+                statusCode: common_1.HttpStatus.UNAUTHORIZED,
+                message: "У вас нет прав"
+            };
+        }
+        await this.teamService.reorder(updates);
+        return { statusCode: common_1.HttpStatus.OK };
     }
     async create(body) {
         return {
@@ -35,7 +48,7 @@ let TeamController = class TeamController {
             data: await this.teamService.find()
         };
     }
-    async find({ id }) {
+    async find(id) {
         const team = await this.teamService.findById(id);
         if (!team) {
             return {
@@ -48,21 +61,23 @@ let TeamController = class TeamController {
             data: team
         };
     }
-    async delete({ id }) {
-        const team = await this.teamService.findById(id);
-        if (!team) {
-            return {
-                statusCode: common_1.HttpStatus.NOT_FOUND,
-                message: "Не известный член команды"
-            };
-        }
-        await this.teamService.delete(team);
+    async delete(id) {
+        await this.teamService.delete(id);
         return {
             statusCode: common_1.HttpStatus.OK,
         };
     }
 };
 exports.TeamController = TeamController;
+__decorate([
+    (0, common_1.Post)('/reorder'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array, Object]),
+    __metadata("design:returntype", Promise)
+], TeamController.prototype, "reorder", null);
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
@@ -81,18 +96,19 @@ __decorate([
     (0, common_1.Get)('/:id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [findteam_param_1.FindTeamParam]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TeamController.prototype, "find", null);
 __decorate([
     (0, common_1.Delete)('/:id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [findteam_param_1.FindTeamParam]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TeamController.prototype, "delete", null);
 exports.TeamController = TeamController = __decorate([
     (0, common_1.Controller)('team'),
-    __metadata("design:paramtypes", [team_service_1.TeamService])
+    __metadata("design:paramtypes", [team_service_1.TeamService,
+        user_service_1.UserService])
 ], TeamController);
 //# sourceMappingURL=team.controller.js.map

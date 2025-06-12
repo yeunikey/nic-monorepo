@@ -12,11 +12,11 @@ interface User {
 
 interface Team {
 
-    private id: number;
-    private fullName: string;
-    private position: string;
-    private image: string;
-    private priority: number;
+    id: number;
+    fullName: string;
+    position: string;
+    image: string;
+    priority: number;
 
 }
 
@@ -31,10 +31,18 @@ interface Article {
 
 }
 
+interface New {
+    id: number;
+    title: string;
+    content: string;
+    imageId: string;
+    createdAt: Date;
+}
 
 export {
     User,
     ApiResponse,
     Team,
-    Article
+    Article,
+    New
 }

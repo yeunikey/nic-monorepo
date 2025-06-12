@@ -1,3 +1,3 @@
 export declare class FindTeamParam {
-    id: number;
+    id: string;
 }

@@ -12,6 +12,7 @@ const team_entity_1 = require("./models/team.entity");
 const team_controller_1 = require("./team.controller");
 const team_service_1 = require("./team.service");
 const typeorm_1 = require("@nestjs/typeorm");
+const user_module_1 = require("../users/user.module");
 let TeamModule = class TeamModule {
 };
 exports.TeamModule = TeamModule;
@@ -21,7 +22,8 @@ exports.TeamModule = TeamModule = __decorate([
             team_controller_1.TeamController
         ],
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([team_entity_1.Team])
+            typeorm_1.TypeOrmModule.forFeature([team_entity_1.Team]),
+            user_module_1.UserModule
         ],
         providers: [
             team_service_1.TeamService

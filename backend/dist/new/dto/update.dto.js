@@ -9,34 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateArticleDto = void 0;
-const class_validator_1 = require("@nestjs/class-validator");
-class CreateArticleDto {
-    authorName;
+exports.UpdateNewDto = void 0;
+const class_validator_1 = require("class-validator");
+class UpdateNewDto {
     title;
-    description;
-    doi;
-    publishedAt;
+    imageId;
+    content;
 }
-exports.CreateArticleDto = CreateArticleDto;
+exports.UpdateNewDto = UpdateNewDto;
 __decorate([
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateArticleDto.prototype, "authorName", void 0);
+], UpdateNewDto.prototype, "title", void 0);
 __decorate([
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateArticleDto.prototype, "title", void 0);
+], UpdateNewDto.prototype, "imageId", void 0);
 __decorate([
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateArticleDto.prototype, "description", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateArticleDto.prototype, "doi", void 0);
-__decorate([
-    (0, class_validator_1.IsDateString)(),
-    __metadata("design:type", String)
-], CreateArticleDto.prototype, "publishedAt", void 0);
-//# sourceMappingURL=create-article.dto.js.map
+], UpdateNewDto.prototype, "content", void 0);
+//# sourceMappingURL=update.dto.js.map

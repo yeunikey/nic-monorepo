@@ -1,14 +1,31 @@
-import { Controller, Post, UploadedFile, UseInterceptors, Get, Param, BadRequestException, NotFoundException, StreamableFile } from '@nestjs/common';
+import { Controller, Post, UploadedFile, UseInterceptors, Get, Param, BadRequestException, NotFoundException, StreamableFile, UseGuards, Req, HttpStatus } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImageService } from './image.service';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthRequest } from 'src/types';
+import { UserService } from 'src/users/user.service';
 
 @Controller('images')
 export class ImageController {
-    constructor(private readonly imageService: ImageService) { }
+    constructor(
+        private readonly imageService: ImageService,
+        private userService: UserService
+    ) { }
 
     @Post('upload')
     @UseInterceptors(FileInterceptor('file'))
-    async upload(@UploadedFile() file: Express.Multer.File) {
+    @UseGuards(AuthGuard)
+    async upload(@UploadedFile() file: Express.Multer.File, @Req() { user: { id: user_id } }: AuthRequest) {
+
+        const user = await this.userService.findById(user_id);
+
+        if (!user) {
+            return {
+                statusCode: HttpStatus.UNAUTHORIZED,
+                message: "У вас нет прав"
+            }
+        }
+
         return {
             statusCode: 200,
             data: await this.imageService.saveImage(file)

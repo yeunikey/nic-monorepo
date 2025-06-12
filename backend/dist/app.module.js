@@ -13,6 +13,8 @@ const auth_module_1 = require("./auth/auth.module");
 const image_entity_1 = require("./image/entities/image.entity");
 const image_module_1 = require("./image/image.module");
 const common_1 = require("@nestjs/common");
+const new_entity_1 = require("./new/models/new.entity");
+const new_module_1 = require("./new/new.module");
 const team_entity_1 = require("./team/models/team.entity");
 const team_module_1 = require("./team/team.module");
 const typeorm_1 = require("@nestjs/typeorm");
@@ -29,6 +31,7 @@ exports.AppModule = AppModule = __decorate([
             image_module_1.ImageModule,
             team_module_1.TeamModule,
             article_module_1.ArticleModule,
+            new_module_1.NewModule,
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
                 host: 'localhost',
@@ -40,7 +43,8 @@ exports.AppModule = AppModule = __decorate([
                     user_entity_1.User,
                     image_entity_1.Image,
                     team_entity_1.Team,
-                    article_1.Article
+                    article_1.Article,
+                    new_entity_1.New
                 ],
                 synchronize: true,
                 logging: true,
